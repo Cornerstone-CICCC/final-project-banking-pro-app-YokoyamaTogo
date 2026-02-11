@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "CLI banking app for testing and exam purposes",
   "main": "src/index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "start": "node src/index.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "chalk": "^4.1.2",

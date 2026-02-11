@@ -1,8 +1,8 @@
-import chalk from 'chalk';
-import Table from 'cli-table3';
-import fs from 'fs';
-import path from 'path';
-import readline from 'readline';
+const fs = require('fs');
+const path = require('path');
+const readline = require('readline');
+const chalk = require('chalk');
+const Table = require('cli-table3');
 
 const dataPath = path.resolve(process.cwd(), 'bank-data.json');
 let data = { accounts: [] };
@@ -69,7 +69,7 @@ function formatMoney(value) {
   }).format(value);
 }
 
-export function generateAccountId() {
+function generateAccountId() {
   let id = '';
   do {
     id = `ACC-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -85,7 +85,7 @@ async function pause() {
   await ask(chalk.gray('\nPress Enter to continue...'));
 }
 
-export async function createAccount() {
+async function createAccount() {
   console.clear();
   renderHeader();
   console.log(chalk.bold('Create New Account'));
@@ -120,7 +120,7 @@ export async function createAccount() {
   await pause();
 }
 
-export async function viewAccountDetails() {
+async function viewAccountDetails() {
   console.clear();
   renderHeader();
   console.log(chalk.bold('View Account Details'));
@@ -153,7 +153,7 @@ export async function viewAccountDetails() {
   await pause();
 }
 
-export async function listAllAccounts() {
+async function listAllAccounts() {
   console.clear();
   renderHeader();
   console.log(chalk.bold('All Accounts'));
@@ -190,7 +190,7 @@ export async function listAllAccounts() {
   await pause();
 }
 
-export async function depositFunds() {
+async function depositFunds() {
   console.clear();
   renderHeader();
   console.log(chalk.bold('Deposit Funds'));
@@ -223,7 +223,7 @@ export async function depositFunds() {
   await pause();
 }
 
-export async function withdrawFunds() {
+async function withdrawFunds() {
   console.clear();
   renderHeader();
   console.log(chalk.bold('Withdraw Funds'));
@@ -256,7 +256,7 @@ export async function withdrawFunds() {
   await pause();
 }
 
-export async function transferFunds() {
+async function transferFunds() {
   console.clear();
   renderHeader();
   console.log(chalk.bold('Transfer Between Accounts'));
@@ -327,7 +327,7 @@ export async function transferFunds() {
   await pause();
 }
 
-export async function viewTransactionHistory() {
+async function viewTransactionHistory() {
   console.clear();
   renderHeader();
   console.log(chalk.bold('Transaction History'));
@@ -364,7 +364,7 @@ export async function viewTransactionHistory() {
   await pause();
 }
 
-export async function deleteAccount() {
+async function deleteAccount() {
   console.clear();
   renderHeader();
   console.log(chalk.bold('Delete Account'));
