@@ -141,4 +141,28 @@ describe('withdrawFunds', () => {
 
     expect(writeFileMock).not.toHaveBeenCalled()
   })
+
+  test('rejects empty amount', async () => {
+    const dummyData = {
+      accounts: [
+        {
+          id: 'ACC-1000',
+          holderName: 'Alice',
+          balance: 100,
+          createdAt: '2025-01-01T00:00:00.000Z',
+          transactions: [],
+        },
+      ],
+    }
+    setReadFileContent(JSON.stringify(dummyData))
+
+    await loadWithdrawModule()
+
+    const answers = ['ACC-1000', '', '']
+    questionMock.mockImplementation((prompt, cb) => cb(answers.shift()))
+
+    await withdrawFunds()
+
+    expect(writeFileMock).not.toHaveBeenCalled()
+  })
 })

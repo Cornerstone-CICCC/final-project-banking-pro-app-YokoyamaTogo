@@ -286,4 +286,35 @@ describe('transferFunds', () => {
     expect(writeFileMock).not.toHaveBeenCalled()
   })
 
+  test('rejects empty amount', async () => {
+    const dummyData = {
+      accounts: [
+        {
+          id: 'ACC-1000',
+          holderName: 'Alice',
+          balance: 200,
+          createdAt: '2025-01-01T00:00:00.000Z',
+          transactions: [],
+        },
+        {
+          id: 'ACC-2000',
+          holderName: 'Bob',
+          balance: 50,
+          createdAt: '2025-01-01T00:00:00.000Z',
+          transactions: [],
+        },
+      ],
+    }
+    setReadFileContent(JSON.stringify(dummyData))
+
+    await loadTransferModule()
+
+    const answers = ['ACC-1000', 'ACC-2000', '', '']
+    questionMock.mockImplementation((prompt, cb) => cb(answers.shift()))
+
+    await transferFunds()
+
+    expect(writeFileMock).not.toHaveBeenCalled()
+  })
+
 })
