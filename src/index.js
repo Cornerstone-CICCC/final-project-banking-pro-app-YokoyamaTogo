@@ -91,8 +91,33 @@ export async function createAccount() {
   console.log(chalk.bold('Create New Account'));
 
   const holderName = await ask('Account holder name: ');
+
+  if (typeof holderName !== "string") {
+    console.log(chalk.red('Invalid name.'));
+    await pause();
+    return;
+  }
+
+  if (holderName === "") {
+    console.log(chalk.red('Account name is required.'));
+    await pause();
+    return;
+  }
+
   const initialDepositInput = await ask('Initial deposit amount: ');
-  const initialDeposit = parseFloat(initialDepositInput);
+  const initialDeposit = initialDepositInput === "" ? 0 : parseFloat(initialDepositInput);
+
+  if (typeof initialDeposit !== "number" || Number.isNaN(initialDeposit)) {
+    console.log(chalk.red('Invalid initial deposit value.'));
+    await pause();
+    return;
+  }
+
+  if (initialDeposit < 0) {
+    console.log(chalk.red('Initial deposit value should be positive.'));
+    await pause();
+    return;
+  }
 
   const id = generateAccountId();
   const now = new Date().toISOString();
