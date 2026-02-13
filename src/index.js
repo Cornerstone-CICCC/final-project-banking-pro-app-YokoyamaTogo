@@ -230,7 +230,25 @@ export async function depositFunds() {
   }
 
   const amountInput = await ask('Deposit amount: ');
+  if (amountInput === "" || amountInput === "0") {
+    console.log(chalk.red('Deposit ammount is empty or zero, canceled.'));
+    await pause();
+    return;
+  }
+
   const amount = parseFloat(amountInput);
+
+  if (typeof amount !== "number" || Number.isNaN(amount)) {
+    console.log(chalk.red('Invalid value.'));
+    await pause();
+    return;
+  }
+
+  if (amount <= 0) {
+    console.log(chalk.red("Deposit ammount should be positive."));
+    await pause();
+    return;
+  }
 
   account.balance += amount;
 
