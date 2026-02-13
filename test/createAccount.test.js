@@ -38,7 +38,7 @@ describe('createAccount', () => {
 
     expect(writeFileMock).toHaveBeenCalledTimes(1)
 
-    // 1回目の呼び出しの引数配列から、filePathとcontentを取得
+    // Get filePath and content from the first call's argument array.
     const [_filepath, content] = writeFileMock.mock.calls[0]
     const savedData = JSON.parse(content)
     expect(savedData.accounts).toHaveLength(1)
