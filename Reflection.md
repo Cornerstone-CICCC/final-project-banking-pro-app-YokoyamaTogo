@@ -1,0 +1,1 @@
+I felt that in this system, since account and financial processing are managed through files, stdin and stdout, it was quite challenging to mock these operations.In a real-world application, it is necessary to integrate with even more external resources than in this system. Therefore, I realized that becoming comfortable with mocking is important for improving testing skills.
